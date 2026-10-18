@@ -100,9 +100,10 @@ function App() {
               <input
                 type="number"
                 step="any"
-                value={b}
+                value={operation == "sqrt" ? "-" : b}
                 onChange={(e) => setB(e.target.value)}
                 placeholder="Enter a number"
+                disabled={operation == "sqrt"}
               />
             </label>
           </div>
@@ -117,6 +118,9 @@ function App() {
               <option value="subtract">Subtraction (a-b)</option>
               <option value="multiply">Multiplication (a×b)</option>
               <option value="divide">Division (a/b)</option>
+              <option value="power">Power (a^b)</option>
+              <option value="sqrt">Square root (√a)</option>
+              <option value="percentage">b% of a</option>
             </select>
           </label>
 

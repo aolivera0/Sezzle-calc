@@ -56,6 +56,12 @@ func CalculateHandler(w http.ResponseWriter, r *http.Request) {
 			writeJSONError(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+	case "power":
+		result = calculator.Power(request.A, request.B)
+	case "sqrt":
+		result, err = calculator.Sqrt(request.A)
+	case "percentage":
+		result = calculator.Percentage(request.A, request.B)
 	default:
 		writeJSONError(w, "Unsupported operation", http.StatusBadRequest)
 		return
