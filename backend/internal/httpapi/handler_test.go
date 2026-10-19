@@ -32,7 +32,7 @@ func TestCalculateHandler_UnsupportedOperation(t *testing.T) {
 		http.MethodPost,
 		"/api/calculate",
 		strings.NewReader(`
-		{"operation":"power","a":10,"b":2}`),
+		{"operation":"log","a":10,"b":2}`),
 	)
 
 	response := httptest.NewRecorder()
@@ -46,6 +46,18 @@ func TestCalculateHandler_UnsupportedOperation(t *testing.T) {
 
 func TestCalculateHandler_DivisionByZero(t *testing.T) {
 	request := httptest.NewRequest(http.MethodPost, "/api/calculate", strings.NewReader(`{"operation":"divide","a":5,"b":0}`))
+
+	response := httptest.NewRecorder()
+
+	CalculateHandler(response, request)
+
+	if response.Code != http.StatusBadRequest {
+		t.Fatalf("expected status %d, got %d", http.StatusBadRequest, response.Code)
+	}
+}
+
+func TestSqrtOfNegativeNumber(t *testing.T) {
+	request := httptest.NewRequest(http.MethodPost, "/api/calculate", strings.NewReader(`{"operation":"sqrt","a":-3,"b":0}`))
 
 	response := httptest.NewRecorder()
 
@@ -97,6 +109,18 @@ func TestCalculateHandler_Operations(t *testing.T) {
 		}, {
 			name:     "division",
 			body:     `{"operation":"divide","a":10,"b":5}`,
+			expected: 2,
+		}, {
+			name:     "power",
+			body:     `{"operation":"power","a":4,"b":2}`,
+			expected: 16,
+		}, {
+			name:     "sqrt",
+			body:     `{"operation":"sqrt","a":4,"b":0}`,
+			expected: 2,
+		}, {
+			name:     "percentage",
+			body:     `{"operation":"percentage","a":10,"b":20}`,
 			expected: 2,
 		},
 	}

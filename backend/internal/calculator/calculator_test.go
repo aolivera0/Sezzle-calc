@@ -2,8 +2,8 @@ package calculator
 
 import "testing"
 
-func TestAdd(t *testing.T){
-	result := Add(3,2)
+func TestAdd(t *testing.T) {
+	result := Add(3, 2)
 
 	expected := float64(5)
 
@@ -12,8 +12,8 @@ func TestAdd(t *testing.T){
 	}
 }
 
-func TestSubtract(t *testing.T){
-	result := Subtract(3,5)
+func TestSubtract(t *testing.T) {
+	result := Subtract(3, 5)
 
 	expected := float64(-2)
 
@@ -22,8 +22,8 @@ func TestSubtract(t *testing.T){
 	}
 }
 
-func TestMultiply(t *testing.T){
-	result := Multiply(5,-11)
+func TestMultiply(t *testing.T) {
+	result := Multiply(5, -11)
 
 	expected := float64(-55)
 
@@ -32,7 +32,7 @@ func TestMultiply(t *testing.T){
 	}
 }
 
-func TestDivide(t *testing.T){
+func TestDivide(t *testing.T) {
 	result, err := Divide(4, 2)
 
 	if err != nil {
@@ -46,10 +46,52 @@ func TestDivide(t *testing.T){
 	}
 }
 
-func TestDivideByZero(t *testing.T){
-	_, err := Divide(3,0)
+func TestDivideByZero(t *testing.T) {
+	_, err := Divide(3, 0)
 
 	if err == nil {
 		t.Fatalf("Divide by 0 should not be allowed")
+	}
+}
+
+func TestPower(t *testing.T) {
+	result := Power(3, 2)
+
+	expected := float64(9)
+
+	if result != expected {
+		t.Errorf(`Power(a,b)=%v, want %v`, result, expected)
+	}
+}
+
+func TestSqrt(t *testing.T) {
+	result, err := Sqrt(9)
+
+	if err != nil {
+		t.Fatalf("Sqrt(9) returned an unexpected error: %v", err)
+	}
+
+	expected := float64(3)
+
+	if result != expected {
+		t.Errorf("Sqrt(9) = %v; want %v", result, expected)
+	}
+}
+
+func TestSqrtOfNegativeNumber(t *testing.T) {
+	_, err := Sqrt(-2)
+
+	if err == nil {
+		t.Fatalf("Sqrt of -2 should not be allowed")
+	}
+}
+
+func TestPercentage(t *testing.T) {
+	result := Percentage(10, 50)
+
+	expected := float64(5)
+
+	if result != expected {
+		t.Errorf(`Percentage(10,50)=%v, want %v`, result, expected)
 	}
 }

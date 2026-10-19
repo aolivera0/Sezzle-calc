@@ -60,6 +60,11 @@ func CalculateHandler(w http.ResponseWriter, r *http.Request) {
 		result = calculator.Power(request.A, request.B)
 	case "sqrt":
 		result, err = calculator.Sqrt(request.A)
+
+		if err != nil {
+			writeJSONError(w, err.Error(), http.StatusBadRequest)
+			return
+		}
 	case "percentage":
 		result = calculator.Percentage(request.A, request.B)
 	default:
