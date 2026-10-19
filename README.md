@@ -1,6 +1,6 @@
 # Sezzle Calculator
 
-A full-stack calculator application built as a technical assessment project. It uses a React and TypeScript frontend and a Go backend that exposes a REST API for arithmetic operations.
+A full-stack calculator application built as a technical assessment project. It uses a React and TypeScript frontend and a Go backend that exposes a REST API for arithmetic operations. Developed by Angel H. Oivera Pinzón. Link of repository: [GitHub](https://github.com/aolivera0/Sezzle-calc).
 
 ## Features
 
